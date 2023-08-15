@@ -24,7 +24,7 @@ default: &default
 development:
   <<: *default
   adapter: postgresql
-  database: postgres
+  database: testing
   host: localhost
   username: postgres
   password: Managua2023
