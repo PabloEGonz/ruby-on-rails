@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_16_011553) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_015751) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_011553) do
     t.string "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -27,6 +29,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_011553) do
     t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "people", id: false, force: :cascade do |t|
@@ -42,6 +46,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_011553) do
     t.integer "likes_counter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
+    t.index ["comments_counter"], name: "index_posts_on_comments_counter"
+    t.index ["likes_counter"], name: "index_posts_on_likes_counter"
   end
 
   create_table "users", force: :cascade do |t|
